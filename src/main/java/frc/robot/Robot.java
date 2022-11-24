@@ -6,9 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.LimitSwitch;
 
 public class Robot extends TimedRobot {
   public DriveBase drive = new DriveBase();
+  public LimitSwitch limitSwitch = new LimitSwitch(9, "Limit Switch 9");
 
   @Override
   public void robotInit() {}
@@ -42,3 +44,5 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 }
+
+// test commit
