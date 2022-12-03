@@ -25,7 +25,6 @@ public class LimitSwitch extends SubsystemBase {
     // Periodic
     @Override
     public void periodic() {
-        System.out.println("ran");
         shuffleboardValue.setBoolean(getValue());
     }
 }
