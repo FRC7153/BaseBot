@@ -5,18 +5,30 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.LimitSwitch;
+import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.RangeFinder;
 
 public class Robot extends TimedRobot {
-  public DriveBase drive = new DriveBase();
+  // Controllers
+  public XboxController controller = new XboxController(1);
+
+  // Subsystems
+  public DriveBase drive = new DriveBase(controller);
   public LimitSwitch limitSwitch = new LimitSwitch(9, "Limit Switch 9");
+  public RangeFinder rangeFinder = new RangeFinder(0);
+  public Pneumatics pneumaticHub = new Pneumatics(6, controller);
 
   @Override
   public void robotInit() {}
 
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+    CommandScheduler.getInstance().run(); // Start subsystems periodic() functions
+  }
 
   @Override
   public void autonomousInit() {}
@@ -29,7 +41,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    drive.drive();
+    //drive.drive();
+    pneumaticHub.teleopPeriodic();
   }
 
   @Override
@@ -44,5 +57,3 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 }
-
-// test commit 2

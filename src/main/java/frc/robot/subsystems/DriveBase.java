@@ -1,13 +1,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class DriveBase {
     // Joysticks
-    private Joystick joystick;
+    private XboxController controller;
     
     // Drive Wheels
     private WPI_TalonFX wheel_fl = new WPI_TalonFX(1);
@@ -21,8 +21,13 @@ public class DriveBase {
     // Drive Base
     private DifferentialDrive diffDrive = new DifferentialDrive(leftWheels, rightWheels);
 
+    // Constuctor
+    public DriveBase(XboxController xboxController) {
+        controller = xboxController;
+    }
+
     // Drive
     public void drive() {
-        diffDrive.arcadeDrive(joystick.getY(), joystick.getZ());
+        diffDrive.arcadeDrive(controller.getLeftY(), controller.getRightX());
     }
 }
