@@ -21,4 +21,4 @@ Used to test sensors, pneumatics, driving, controls, and other electronics.
 6. Pneumatics Hub
 
 ## Autonomous
-No autonomous yet, may the chassis may be used for testing for future autos.
+No autonomous yet, but the chassis may be used for testing for future autos.
