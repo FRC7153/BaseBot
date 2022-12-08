@@ -5,16 +5,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.LimitSwitch;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.RangeFinder;
+import frc.team7153.AutoRecorder.Controllers.XBOXController;
 
 public class Robot extends TimedRobot {
   // Controllers
-  public XboxController controller = new XboxController(1);
+  public XBOXController controller = new XBOXController(1, "robot.java");
 
   // Subsystems
   public DriveBase drive = new DriveBase(controller);
