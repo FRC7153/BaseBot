@@ -47,6 +47,5 @@ public class IMU extends SubsystemBase {
         shuffle_x.setDouble(imu.getAccelX());
         shuffle_y.setDouble(imu.getAccelY());
         shuffle_z.setDouble(imu.getAccelZ());
-        //amongus.sus;
     }
 }
