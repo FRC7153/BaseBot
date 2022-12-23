@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import frc.team7153.AutoRecorder.Controllers.XBOXController;
 
 public class Pneumatics {
     // Solenoids
@@ -18,12 +18,12 @@ public class Pneumatics {
     private Solenoid sSolenoid;
 
     // Objects
-    private XBOXController controller;
+    private XboxController controller;
     private Compressor comp;
     private NetworkTableEntry pressureOutput;
 
     // Constructor
-    public Pneumatics(int canID, XBOXController xboxController) {
+    public Pneumatics(int canID, XboxController xboxController) {
         dbSolenoid = new DoubleSolenoid(canID, PneumaticsModuleType.REVPH, 0, 1);
         sSolenoid = new Solenoid(canID, PneumaticsModuleType.REVPH, 2);
         comp = new Compressor(canID, PneumaticsModuleType.REVPH);
@@ -40,7 +40,7 @@ public class Pneumatics {
 
     // Execute
     public void teleopPeriodic() {
-        if (controller.getRightTrigger() > 0.5) {
+        if (controller.getRightTriggerAxis() > 0.5) {
             dbSolenoid.set(DoubleSolenoid.Value.kReverse);
         } else {
             dbSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -48,6 +48,8 @@ public class Pneumatics {
 
         sSolenoid.set(controller.getXButton());
 
+        // This is bad code:
         pressureOutput.setDouble(comp.getPressure());
+        // telemetry updates should run periodically, regardless of robot state
     }
 }

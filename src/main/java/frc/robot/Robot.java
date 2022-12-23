@@ -5,22 +5,26 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.IMU;
 import frc.robot.subsystems.LimitSwitch;
+import frc.robot.subsystems.PingRangeFinder;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.RangeFinder;
-import frc.team7153.AutoRecorder.Controllers.XBOXController;
 
 public class Robot extends TimedRobot {
   // Controllers
-  public XBOXController controller = new XBOXController(1, "robot.java");
+  public XboxController controller = new XboxController(0);
 
   // Subsystems
-  public DriveBase drive = new DriveBase(controller);
+  public IMU imu = new IMU();
+  public DriveBase drive = new DriveBase(controller, imu, 0.4);
   public LimitSwitch limitSwitch = new LimitSwitch(9, "Limit Switch 9");
   public RangeFinder rangeFinder = new RangeFinder(0);
   public Pneumatics pneumaticHub = new Pneumatics(6, controller);
+  public PingRangeFinder pingRange = new PingRangeFinder(0, 1);
 
   @Override
   public void robotInit() {}
@@ -41,7 +45,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    //drive.drive();
+    drive.drive();
     pneumaticHub.teleopPeriodic();
   }
 
